@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>For Mayank 🖤</title>
+
+<style>
+body{
+    margin:0;
+    background:#0a0a0a;
+    font-family:"Helvetica Neue", sans-serif;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* card */
+.card{
+    width:390px;
+    background:#121212;
+    padding:45px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 0 60px rgba(255,60,120,.12);
+    position:relative;
+    transition:.2s;
+
+
+}
+
+h1{
+    font-weight:300;
+    line-height:1.6;
+}
+
+/* buttons */
+button{
+    margin:12px;
+    padding:12px 22px;
+    border-radius:25px;
+    border:1px solid #2a2a2a;
+    background:#1c1c1c;
+    color:white;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    background:#ff2d7a;
+}
+
+.yes{
+    font-weight:bold;
+    font-size:18px;
+    background:#ff2d7a;
+}
+
+.no{
+    position:absolute;
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    color:#ff2d7a;
+    opacity:.25;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+/* whole screen shake */
+@keyframes shake{
+  0%{transform:translate(0,0);}
+  20%{transform:translate(-8px,4px);}
+  40%{transform:translate(8px,-6px);}
+  60%{transform:translate(-6px,6px);}
+  80%{transform:translate(6px,-4px);}
+  100%{transform:translate(0,0);}
+}
+
+.shake{
+  animation:shake .18s;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="apocalypse.mp3" type="audio/mpeg">
+</audio>
+
+<div id="app" class="card"></div>
+
+<script>
+const app=document.getElementById("app");
+
+/* floating hearts */
+for(let i=0;i<25;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(10+Math.random()*17)+"px";
+    h.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(h);
+}
+
+function render(html){
+    app.innerHTML = html;
+}
+
+/* 1 */
+function page1(){
+render(`
+<h1>Wassup you cold-hearted bitch 🖤</h1>
+<button onclick="page2()">Okay just kidding >>></button>
+`);
+}
+
+/* 2 */
+function page2(){
+render(`
+<h1>Is this the right time to ask you something…?</h1>
+<button onclick="tease()">You’re gonna say it anyway babe</button>
+<button onclick="merge1()">There’s no such thing as the right time… when you feel it, you feel it</button>
+`);
+}
+
+function tease(){
+render(`
+<h1>You do know me haha… only a little bit though 😌</h1>
+<button onclick="merge1()">Continue ➜</button>
+`);
+}
+
+/* merge */
+function merge1(){
+render(`
+<h1>So here’s the question…</h1>
+<button onclick="merge2()">JUST ASKK ALREADYYYYY BITCH</button>
+`);
+}
+
+function merge2(){
+render(`
+<h1>There isn’t a single day I don’t want to feel your presence… and since two wheels already have your heart, how about one girl too this Valentine’s?🥺</h1>
+<button onclick="drum()">drumrolllllls 🥁</button>
+`);
+}
+
+/* proposal */
+function drum(){
+render(`
+<h1>Mayank, will you be my valentine?</h1>
+<button class="yes" onclick="yes()">YES</button>
+<button class="no" id="noBtn">NO?? You thought you could say no to me?</button>
+`);
+
+let noBtn=document.getElementById("noBtn");
+
+/* make sure it starts somewhere visible */
+noBtn.style.left = "120px";
+noBtn.style.top  = "120px";
+
+/* smooth runaway effect */
+function move(){
+    const maxX = app.clientWidth - noBtn.offsetWidth - 10;
+    const maxY = app.clientHeight - noBtn.offsetHeight - 10;
+
+    noBtn.style.transition = "all .18s ease";
+
+    noBtn.style.left = Math.random()*maxX + "px";
+    noBtn.style.top  = Math.random()*maxY + "px";
+}
+
+/* escape BEFORE click */
+noBtn.addEventListener("mouseenter", move);
+noBtn.addEventListener("mousemove", move);
+noBtn.addEventListener("mousedown", move);
+
+}
+
+/* yes */
+function yes(){
+render(`
+<h1> Your Triumph wasn’t your best pick… I am 😛...</h1> 
+<button onclick="rethink()"> I would like to rethink after hearing this </button> 
+<button onclick="final()">No, I’m glad you came into my life</button>
+`);
+}
+
+function rethink(){
+render(`
+<h1>Two wheels will stay… but the girl who adores you this much? Risky to lose that 😛 :(((</h1>
+<button onclick="yes()">Give it another thought? </button>
+`);
+}
+
+/* SAME LINE, just slightly smoother formatting */
+function final(){
+render(`
+<h1>No U-turns after that yes… you’ve been locked in here forever… and you just can’t say goodbye ∞</h1>
+`);
+}
+
+page1();
+</script>
+
+</body>
+</html>
